@@ -1,0 +1,9 @@
+{
+  "name": "fake-server",
+  "version": "0.0.1",
+  "description": "fake server",
+  "scripts": {
+  },
+  "type": "module",
+  "license": "mit"
+}
