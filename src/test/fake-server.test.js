@@ -8,6 +8,15 @@ beforeEach(() => {
     server = new MockServer()
 })
 
-test("noUnverifiedRequests", () => {
-    assert.ok(server.allVerified())
+test("noUnverifiedRequestsByDefault", () => {
+    assert.equal(server.allVerified(), true)
+})
+
+test("unverifiedRequests", () => {
+    const req = {
+        method: 'GET',
+        url: "/some-url"
+    }
+    server.handle(req)
+    assert.equal(server.allVerified(), false)
 })
