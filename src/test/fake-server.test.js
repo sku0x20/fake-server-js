@@ -5,7 +5,7 @@ import assert from 'node:assert/strict'
 let server = new MockServer()
 
 beforeEach(() => {
-    server = new MockServer((req, res) => {
+    server = new MockServer(async (req, res) => {
         res.status = 404
     })
 })
@@ -14,19 +14,19 @@ test("noUnverifiedRequestsByDefault", () => {
     assert.equal(server.allVerified(), true)
 })
 
-test("unverifiedRequests", () => {
+test("unverifiedRequests", async () => {
     const req = {
         method: 'GET',
         url: "/some-url"
     }
-    server.handle(req, {})
+    await server.handle(req, {})
     assert.equal(server.allVerified(), false)
 })
 
-test("defaultResponse", () => {
+test("defaultResponse", async () => {
     const req = {}
     const res = {status: undefined}
-    server.handle(req, res)
+    await server.handle(req, res)
     assert.equal(res.status, 404)
 })
 

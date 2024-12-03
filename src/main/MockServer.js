@@ -11,8 +11,8 @@ export default class MockServer {
         return this.#receivedRequests.length === 0
     }
 
-    handle(req, res) {
+    async handle(req, res) {
         this.#receivedRequests.push(req)
-        this.#defaultResponse(req, res)
+        await this.#defaultResponse(req, res)
     }
 }
