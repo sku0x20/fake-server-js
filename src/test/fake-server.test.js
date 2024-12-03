@@ -1,6 +1,13 @@
-import test from 'node:test'
-import assert from 'node:assert'
+import {beforeEach, test} from 'node:test'
+import MockServer from '../main/MockServer.js'
+import assert from 'node:assert/strict'
 
-test("pass", () => {
-    assert.strictEqual(1, 1)
+let server = new MockServer()
+
+beforeEach(() => {
+    server = new MockServer()
+})
+
+test("noUnverifiedRequests", () => {
+    assert.ok(server.allVerified())
 })
