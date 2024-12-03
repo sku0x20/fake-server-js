@@ -20,4 +20,9 @@ export default class MockServer {
     responseWith(respond) {
         this.#respond = respond
     }
+
+    tryMatch(httpMethod, regex) {
+        return null;
+    }
+
 }

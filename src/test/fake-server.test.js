@@ -48,3 +48,16 @@ test("respondWith", async () => {
     await server.handle(req, res)
     assert.equal(res.status, 200)
 })
+
+test("nullIfNothingTryMatch", async () => {
+    await server.handle(
+        {
+            method: 'GET',
+            url: "/some-url"
+        },
+        {}
+    )
+
+    const req = server.tryMatch("GET", /\/another-url/)
+    assert.equal(req, null)
+})
