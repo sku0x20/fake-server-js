@@ -30,19 +30,21 @@ test("defaultResponse", async () => {
     assert.equal(res.status, 404)
 })
 
-// test("respondWith", () => {
-//     const req = {
-//         method: 'GET',
-//         url: "/some-url"
-//     }
-//     const res = {
-//         req: req,
-//         status: 404
-//     }
-//
-//     server.respondWith(async (req, res) => {
-//         res.end("Responded")
-//     })
-//
-//     server.handle()
-// })
+test("respondWith", async () => {
+    const req = {
+        method: 'GET',
+        url: "/some-url"
+    }
+    const res = {
+        req: req,
+        status: undefined
+    }
+
+    const respond = async (req, res) => {
+        await (new Promise(resolve => setTimeout(resolve, 20)))
+        res.status = 200
+    }
+    server.responseWith(respond)
+    await server.handle(req, res)
+    assert.equal(res.status, 200)
+})
