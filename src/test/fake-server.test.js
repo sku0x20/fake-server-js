@@ -76,3 +76,17 @@ test("tryMatch", async () => {
     assert.equal(server.tryMatch("GET", /\/another-url/), null)
     assert.equal(server.tryMatch("GET", /\/some-url/), req)
 })
+
+test("reqsIsFifo", async () => {
+    let req = {
+        method: 'GET',
+        url: "/some-url"
+    };
+    await server.handle(req, {})
+    assert.equal(server.tryMatch("GET", /\/some-url/), req)
+    assert.equal(server.tryMatch("GET", /\/some-url/), null)
+
+    await server.handle(req, {})
+    assert.equal(server.tryMatch("GET", /\/some-url/), req)
+    assert.equal(server.tryMatch("GET", /\/some-url/), null)
+})
