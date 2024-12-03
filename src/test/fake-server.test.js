@@ -61,3 +61,18 @@ test("nullIfNothingTryMatch", async () => {
     const req = server.tryMatch("GET", /\/another-url/)
     assert.equal(req, null)
 })
+
+test("tryMatch", async () => {
+    let req = {
+        method: 'GET',
+        url: "/some-url"
+    };
+    await server.handle(
+        req,
+        {}
+    )
+
+    assert.equal(server.tryMatch("POST", /\/some-url/), null)
+    assert.equal(server.tryMatch("GET", /\/another-url/), null)
+    assert.equal(server.tryMatch("GET", /\/some-url/), req)
+})

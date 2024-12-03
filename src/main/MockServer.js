@@ -22,7 +22,14 @@ export default class MockServer {
     }
 
     tryMatch(httpMethod, regex) {
-        return null;
+        for (let i = 0; i < this.#receivedRequests.length; i++) {
+            const req = this.#receivedRequests[i]
+            if (req.method === httpMethod && regex.test(req.url)) {
+                this.#receivedRequests.splice(i, 1)
+                return req
+            }
+        }
+        return null
     }
 
 }
