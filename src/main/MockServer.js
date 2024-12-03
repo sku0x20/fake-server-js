@@ -12,6 +12,7 @@ export default class MockServer {
     }
 
     async handle(req, res) {
+        // since js is single threaded; need not lock list access/write
         this.#receivedRequests.push(req)
         await this.#defaultResponse(req, res)
     }
