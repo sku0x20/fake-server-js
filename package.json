@@ -3,7 +3,12 @@
   "version": "0.0.2",
   "description": "fake server",
   "homepage": "https://github.com/sku0x20/fake-server-js",
-  "files": ["src/main/**/*"],
+  "files": [
+    "src/main/**/*"
+  ],
+  "exports": {
+    ".": "./src/main/FakeServer.js"
+  },
   "scripts": {
     "test": "node --test-timeout 30000 --test src/test"
   },
