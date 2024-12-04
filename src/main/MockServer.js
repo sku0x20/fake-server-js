@@ -32,4 +32,15 @@ export default class MockServer {
         return null
     }
 
+    async matching(httpMethod, regex) {
+        while (true) {
+            const req = this.tryMatch(httpMethod, regex)
+            if (req !== null) {
+                console.log("returned")
+                return req
+            }
+            console.log("waiting")
+            await new Promise(resolve => setInterval(resolve, 10))
+        }
+    }
 }

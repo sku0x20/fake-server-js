@@ -90,3 +90,23 @@ test("reqsIsFifo", async () => {
     assert.equal(server.tryMatch("GET", /\/some-url/), req)
     assert.equal(server.tryMatch("GET", /\/some-url/), null)
 })
+
+test("matching", async () => {
+    let req = {
+        method: 'GET',
+        url: "/some-url"
+    };
+    const sendAsync = async () => {
+        await new Promise(resolve => setTimeout(resolve, 50))
+        await server.handle(req, {})
+        console.log("here - 3")
+    }
+    sendAsync()
+    console.log("here - 1")
+    assert.equal(server.tryMatch("GET", /\/some-url/), null)
+    console.log("here - 2")
+    const waitedReq = await server.matching("GET", /\/some-url/)
+    console.log("here - 4")
+    assert.equal(waitedReq, req)
+    console.log("here - 5")
+})
