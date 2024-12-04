@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "fake server",
   "scripts": {
-    "test": "node --test src/test"
+    "test": "node --test-timeout 30000 --test src/test"
   },
   "type": "module",
   "license": "mit"
