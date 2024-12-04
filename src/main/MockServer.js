@@ -33,20 +33,12 @@ export default class MockServer {
     }
 
     async matching(httpMethod, regex) {
-        const req = this.tryMatch(httpMethod, regex)
-        if (req !== null) {
-            return req
+        while (true) {
+            const req = this.tryMatch(httpMethod, regex)
+            if (req !== null) {
+                return req
+            }
+            await new Promise(resolve => setTimeout(resolve, 10))
         }
-        await new Promise(resolve => setInterval(resolve, 10))
-        return await this.matching(httpMethod, regex)
-        // while (true) {
-        //     const req = this.tryMatch(httpMethod, regex)
-        //     if (req !== null) {
-        //         console.log("returned")
-        //         return req
-        //     }
-        //     console.log("waiting")
-        //     await new Promise(resolve => setInterval(resolve, 10))
-        // }
     }
 }
