@@ -1,11 +1,11 @@
 import {beforeEach, test} from 'node:test'
-import MockServer from '../main/MockServer.js'
+import FakeServer from '../main/FakeServer.js'
 import assert from 'node:assert/strict'
 
-let server = new MockServer()
+let server = new FakeServer()
 
 beforeEach(() => {
-    server = new MockServer(async (req, res) => {
+    server = new FakeServer(async (req, res) => {
         res.status = 404
     })
 })

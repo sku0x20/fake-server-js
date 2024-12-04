@@ -1,4 +1,4 @@
-export default class MockServer {
+export default class FakeServer {
 
     #receivedRequests = []
     #respond = null
